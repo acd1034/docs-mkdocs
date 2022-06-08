@@ -30,10 +30,17 @@ def to_fname(file: pathlib.Path) -> str:
 
 def convert(file_or_dir: pathlib.Path) -> dict:
     if file_or_dir.is_file():
-        return {description(file_or_dir): to_fname(file_or_dir)}
+        file = file_or_dir
+        return {description(file): to_fname(file)}
+    else:
+        dir = file_or_dir
     return {
-        description(file_or_dir): sorted(
-            ({description(file): to_fname(file)} for file in file_or_dir.glob("*.md")),
+            description(dir): sorted(
+                (
+                    convert(file)
+                    for file in dir.iterdir()
+                    if file.is_dir() or file.suffix == ".md"
+                ),
             key=lambda d: next(iter(d.keys())),
         )
     }
