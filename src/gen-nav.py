@@ -21,7 +21,8 @@ def append_yaml(fname: str, obj: dict) -> None:
 
 
 def description(file_or_dir: pathlib.Path) -> str:
-    return file_or_dir.stem
+    name = file_or_dir.stem
+    return name[0].upper() + name[1:]
 
 
 def to_fname(file: pathlib.Path) -> str:
@@ -30,13 +31,20 @@ def to_fname(file: pathlib.Path) -> str:
 
 def convert(file_or_dir: pathlib.Path) -> dict:
     if file_or_dir.is_file():
-        return {description(file_or_dir): to_fname(file_or_dir)}
-    return {
-        description(file_or_dir): sorted(
-            ({description(file): to_fname(file)} for file in file_or_dir.glob("*.md")),
-            key=lambda d: next(iter(d.keys())),
-        )
-    }
+        file = file_or_dir
+        return {description(file): to_fname(file)}
+    else:
+        dir = file_or_dir
+        return {
+            description(dir): sorted(
+                (
+                    convert(file)
+                    for file in dir.iterdir()
+                    if file.is_dir() or file.suffix == ".md"
+                ),
+                key=lambda d: next(iter(d.keys())),
+            )
+        }
 
 
 def main():
