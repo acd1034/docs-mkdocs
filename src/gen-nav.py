@@ -4,7 +4,8 @@ import pathlib
 import yaml
 
 
-def read_yaml(fname: str) -> list | dict:
+# def read_yaml(fname: str) -> list | dict:
+def read_yaml(fname: str):
     with open(fname, "r") as f:
         config = yaml.safe_load(f)
     return config
