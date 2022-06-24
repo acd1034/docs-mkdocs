@@ -22,7 +22,7 @@ def append_yaml(fname: str, obj: dict) -> None:
 
 
 def description(file_or_dir: pathlib.Path) -> str:
-    name = file_or_dir.stem
+    name = file_or_dir.stem.replace("-", " ")
     return name[0].upper() + name[1:]
 
 
