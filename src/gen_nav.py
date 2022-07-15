@@ -55,13 +55,9 @@ def main():
         convert(pathlib.Path("docs") / fname_or_dirname)
         for fname_or_dirname in fnames_and_dirnames
     ]
-    # # print(nav)
-    # mkdocs = read_yaml("mkdocs.yml.orig")
-    # mkdocs["nav"] = nav
-    # # print(mkdocs)
-    # write_yaml("mkdocs.yml", mkdocs)
+    # print(nav)
     shutil.copy("mkdocs.yml.orig", "mkdocs.yml")
-    append_yaml("mkdocs.yml", {"nav": nav})
+    # append_yaml("mkdocs.yml", {"nav": nav})
 
 
 if __name__ == "__main__":

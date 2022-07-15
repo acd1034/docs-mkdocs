@@ -21,4 +21,4 @@ markdown_extensions:
   - toc:
       permalink: true
   # others
-  - fontawesome_markdown
+  # - fontawesome_markdown
