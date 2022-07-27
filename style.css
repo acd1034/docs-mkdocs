@@ -1,0 +1,6 @@
+h1::before {
+  content: "📘 ";
+}
+h2::before {
+  content: "📌 ";
+}
